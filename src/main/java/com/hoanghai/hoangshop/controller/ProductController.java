@@ -1,8 +1,8 @@
 package com.hoanghai.hoangshop.controller;
 
-import com.hoanghai.hoangshop.domain.Category;
 import com.hoanghai.hoangshop.domain.Customer;
-import com.hoanghai.hoangshop.service.CustomerService;
+import com.hoanghai.hoangshop.domain.Product;
+import com.hoanghai.hoangshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,10 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,12 +20,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-@RequestMapping("admin/customers")
-public class CustomersController {
+@RequestMapping("admin/products")
+public class ProductController {
     @Autowired
-    CustomerService customerService ;
+    ProductService productService;
     @RequestMapping("")
-    public String showCustomers (Model model,
+    public String showProduct (Model model,
                                  @RequestParam(name = "name1", required = false) String name1,
                                  @RequestParam("page") Optional<Integer> page,
                                  @RequestParam("size") Optional<Integer> size) {
@@ -34,13 +33,13 @@ public class CustomersController {
         Integer pageSize = size.orElse(5);
 
         Pageable pageable = PageRequest.of(currentPage - 1, pageSize, Sort.by("id"));
-        Page<Customer> resultPage = null;
+        Page<Product> resultPage = null;
 
         if (StringUtils.hasText(name1)) {
 //            resultPage = customerService.findByNameContaining(name1, pageable);
 //            model.addAttribute("name", name1);
         } else {
-            resultPage = customerService.findAll(pageable);
+            resultPage = productService.findAll(pageable);
         }
         int totalPage = resultPage.getTotalPages();
         if (totalPage > 0) {
@@ -59,15 +58,7 @@ public class CustomersController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        model.addAttribute("accountPage", resultPage);
-
-        return "admin/customers/list";
+        model.addAttribute("productPage", resultPage);
+        return "admin/products/list";
     }
-    @GetMapping("delete/{id}")
-    public ModelAndView deleteById(ModelMap model, @PathVariable("id") Long id) {
-       customerService.deletById(id);
-        model.addAttribute("message", "DANH MỤC ĐÃ ĐƯỢC XÓA !");
-        return new ModelAndView("forward:/admin/customers", model);}
-
-
 }

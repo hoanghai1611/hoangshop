@@ -28,8 +28,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deletById(Long id) { customerRepository.deleteById(id);}
 
-
+    @Override
+    public <S extends Customer> S save(S entity) {
+        return customerRepository.save(entity);
     }
+
+
+}
 
 
 
