@@ -2,7 +2,9 @@ package com.hoanghai.hoangshop.domain;
 
 import jakarta.persistence.*;
 import jdk.jfr.DataAmount;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DialectOverride;
 
 import java.io.Serializable;
@@ -11,6 +13,9 @@ import java.util.List;
 
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "products")
 public class Product implements Serializable {
     @Id
@@ -24,8 +29,8 @@ public class Product implements Serializable {
     private String newPrice ;
     @Column(nullable = false)
     private String oldPrice ;
-  @Column(length = 200)
-  private String image;
+    @Column(length = 200)
+    private String image;
     @Column(columnDefinition = "varchar(100) not null")
     private String description ;
     @Column(columnDefinition = "varchar(100) not null")

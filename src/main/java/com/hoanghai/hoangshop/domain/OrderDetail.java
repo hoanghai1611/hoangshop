@@ -1,14 +1,21 @@
 package com.hoanghai.hoangshop.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name = "orderdetails")
-public class OrderDetail {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class OrderDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_detail_id")
-    private Long orderDetailId;
+    private Long id;
     @Column( nullable = false)
     private  int quantity;
     @Column( nullable = false, name = "unti_price")
@@ -24,27 +31,5 @@ public class OrderDetail {
 
 
 
-    public Long getOrderDetailId() {
-        return orderDetailId;
-    }
 
-    public void setOrderDetailId(Long orderDetailId) {
-        this.orderDetailId = orderDetailId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getUntilPrice() {
-        return untilPrice;
-    }
-
-    public void setUntilPrice(double untilPrice) {
-        this.untilPrice = untilPrice;
-    }
 }

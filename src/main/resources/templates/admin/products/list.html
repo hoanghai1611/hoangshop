@@ -53,23 +53,23 @@
                     </thead>
                     <tbody class="tbody-list-product">
                         <tr th:each="item, isStat : ${productPage.content}">
-<!--                            <td class="td-img">-->
-<!--                                <img th:src="@{${'/admin/products/images/' + item.image}}" alt="">-->
-<!--                            </td>-->
-<!--                            <td class="td-id">[[${item.productId}]]</td>-->
+                            <td class="td-img">
+                                <img th:src="@{${item.image}}" alt="">
+                            </td>
+                            <td class="td-id">[[${item.id}]]</td>
                             <td th:text="${item.name}"></td>
                             <td th:text="${item.quantity}"></td>
                             <td th:text="${#numbers.formatDecimal(item.newPrice, 0, 'POINT', 0, 'POINT')}"></td>
                             <td th:text="${item.discount}"></td>               
                             <td th:text="${item.category.name}"></td>
-<!--                            <td>-->
-<!--                                <a th:href="@{'/admin/products/edit/' + ${item.productId}}" class="btn btn-outline-info ml-3"><i-->
-<!--                                        class="fa-solid fa-pen-to-square"></i></a>-->
-<!--                                <a  th:data-id="${item.productId}"-->
-<!--                                    th:data-name="${item.name}"-->
-<!--                                    onclick="showConfirmModalDialog(this.getAttribute('data-id'), this.getAttribute('data-name'))"-->
-<!--                                    class="btn btn-outline-danger ml-3"><i class="fa-solid fa-trash-can"></i></a>-->
-<!--                            </td>-->
+                            <td>
+                                <a th:href="@{'/admin/products/edit/' + ${item.id}}" class="btn btn-outline-info ml-3"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                                <a  th:data-id="${item.id}"
+                                    th:data-name="${item.name}"
+                                    onclick="showConfirmModalDialog(this.getAttribute('data-id'), this.getAttribute('data-name'))"
+                                    class="btn btn-outline-danger ml-3"><i class="fa-solid fa-trash-can"></i></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
